@@ -13,9 +13,11 @@ require_once __DIR__ . '/inc/auth.php';
 
       <div class="cta">
         <?php if (is_logged_in()): ?>
-          <a class="btn btn-outline-light" href="dashboard.php">Buka Dashboard</a> <a class="btn btn-link text-decoration-none" href="logout.php">Logout</a>
+          <a class="btn btn-outline-light" href="dashboard.php">Buka Dashboard</a>
+          <a class="btn btn-link text-decoration-none" href="logout.php">Logout</a>
         <?php else: ?>
-          <a class="btn btn-primary" href="register.php">Daftar Sekarang</a> <a class="btn btn-outline-light" href="login.php">Login</a>
+          <a class="btn btn-primary" href="register.php">Daftar Sekarang</a>
+          <a class="btn btn-outline-light" href="login.php">Login</a>
         <?php endif; ?>
       </div>
     </div>
@@ -24,31 +26,24 @@ require_once __DIR__ . '/inc/auth.php';
       <div class="card">
         <h3>Ringkasan</h3>
         <p class="lead">Rumus HPP: Persediaan Awal + Pembelian - Persediaan Akhir</p>
+        <small>Catat dan simpan perhitungan dalam satu tempat.</small>
       </div>
     </div>
   </section>
 
   <section class="features">
-    <section class="features row mt-4">
-      <div class="col-md-4">
-        <div class="feature p-3">
-          <h3>Aman & Lokal</h3>
-          <p>Semua data disimpan lokal di SQLite pada server Anda.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature p-3">
-          <h3>Riwayat</h3>
-          <p>Simpan riwayat perhitungan untuk referensi dan audit.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature p-3">
-          <h3>Mudah Digunakan</h3>
-          <p>Form sederhana yang cocok untuk pencatatan cepat</p>
-        </div>
-      </div>
-    </section>
+    <div class="feature p-3">
+      <h3>Aman & Lokal</h3>
+      <p>Semua data disimpan lokal di SQLite pada server Anda.</p>
+    </div>
+    <div class="feature p-3">
+      <h3>Riwayat</h3>
+      <p>Simpan riwayat perhitungan untuk referensi dan audit.</p>
+    </div>
+    <div class="feature p-3">
+      <h3>Mudah Digunakan</h3>
+      <p>Form sederhana yang cocok untuk pencatatan cepat.</p>
+    </div>
   </section>
 </main>
 

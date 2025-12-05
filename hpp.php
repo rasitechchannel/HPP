@@ -7,19 +7,34 @@ $user = current_user();
 
 $result = null;
 $error = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $bi = floatval(str_replace(',', '.', $_POST['beginning_inventory'] ?? 0));
-    $p  = floatval(str_replace(',', '.', $_POST['purchases'] ?? 0));
-    $ei = floatval(str_replace(',', '.', $_POST['ending_inventory'] ?? 0));
 
-    if ($bi < 0 || $p < 0 || $ei < 0) {
+function parse_number($value) {
+    if ($value === null) return null;
+    $normalized = str_replace(',', '.', trim($value));
+    return filter_var($normalized, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND) !== false
+        ? (float)$normalized
+        : null;
+}
+
+function field_value($key, $default = '0') {
+    return htmlspecialchars($_POST[$key] ?? $default, ENT_QUOTES, 'UTF-8');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $bi = parse_number($_POST['beginning_inventory'] ?? null);
+    $p  = parse_number($_POST['purchases'] ?? null);
+    $ei = parse_number($_POST['ending_inventory'] ?? null);
+
+    if ($bi === null || $p === null || $ei === null) {
+        $error = 'Input harus berupa angka yang valid.';
+    } elseif ($bi < 0 || $p < 0 || $ei < 0) {
         $error = 'Nilai tidak boleh negatif.';
     } else {
         $cogs = $bi + $p - $ei;
         $result = $cogs;
         // simpan ke DB
         $pdo = get_pdo();
-        $stmt = $pdo->prepare('INSERT INTO hpp_records (user_id, beginning_inventory, purchases, ending_inventory, cogs) VALUES (?,?,?,?,?)');
+        $stmt = $pdo->prepare('INSERT INTO hpp_records (user_id, beginning_inventory, purchases, ending_inventory, cogs) VALUES(?,?,?,?,?)');
         $stmt->execute([$user['id'], $bi, $p, $ei, $cogs]);
     }
 }
@@ -32,15 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <form method="post" class="form">
     <div class="mb-3">
       <label class="form-label">Persediaan Awal</label>
-      <input name="beginning_inventory" required class="form-control" value="<?php echo htmlspecialchars($_POST['beginning_inventory'] ?? '0'); ?>">
+      <input name="beginning_inventory" type="number" step="0.01" min="0" required class="form-control" value="<?php echo field_value('beginning_inventory'); ?>">
     </div>
     <div class="mb-3">
       <label class="form-label">Pembelian</label>
-      <input name="purchases" required class="form-control" value="<?php echo htmlspecialchars($_POST['purchases'] ?? '0'); ?>">
+      <input name="purchases" type="number" step="0.01" min="0" required class="form-control" value="<?php echo field_value('purchases'); ?>">
     </div>
     <div class="mb-3">
       <label class="form-label">Persediaan Akhir</label>
-      <input name="ending_inventory" required class="form-control" value="<?php echo htmlspecialchars($_POST['ending_inventory'] ?? '0'); ?>">
+      <input name="ending_inventory" type="number" step="0.01" min="0" required class="form-control" value="<?php echo field_value('ending_inventory'); ?>">
     </div>
     <div class="d-flex gap-2">
       <button class="btn btn-primary" type="submit">Hitung HPP</button>
@@ -51,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php if ($result !== null): ?>
     <section class="card">
       <h2>Hasil</h2>
-      <p>HPP: <strong><?php echo number_format($result, 2); ?></strong></p>
+      <p class="mb-1">HPP: <strong><?php echo number_format($result, 2); ?></strong></p>
+      <small>Perhitungan: <?php echo number_format($bi, 2); ?> + <?php echo number_format($p, 2); ?> - <?php echo number_format($ei, 2); ?></small>
     </section>
   <?php endif; ?>
 

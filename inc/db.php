@@ -44,13 +44,10 @@ function init_db(PDO $pdo) {
         FOREIGN KEY(user_id) REFERENCES users(id)
     )");
 
-    // optional: create an admin test user
-    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users');
-    $count = (int)$stmt->execute() ? $stmt->fetchColumn() : 0;
-    // Insert a default user only if table is empty
+    // Create a default admin user when table is empty
     $stmt = $pdo->query('SELECT COUNT(*) FROM users');
-    $c = (int)$stmt->fetchColumn();
-    if ($c === 0) {
+    $userCount = (int)$stmt->fetchColumn();
+    if ($userCount === 0) {
         $pw = password_hash('admin', PASSWORD_DEFAULT);
         $insert = $pdo->prepare('INSERT INTO users (username, password) VALUES (?,?)');
         $insert->execute(['admin', $pw]);
