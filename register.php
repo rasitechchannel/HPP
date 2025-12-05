@@ -5,24 +5,33 @@ require_once __DIR__ . '/inc/auth.php';
 
 $error = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $password2 = $_POST['password2'] ?? '';
-    if ($username === '' || $password === '') {
-        $error = 'Username dan password wajib diisi.';
-    } elseif ($password !== $password2) {
-        $error = 'Password tidak cocok.';
+  $username = trim($_POST['username'] ?? '');
+  $password = $_POST['password'] ?? '';
+  $password2 = $_POST['password2'] ?? '';
+
+  if ($username === '' || $password === '') {
+    $error = 'Username dan password wajib diisi.';
+  } elseif (strlen($username) < 3) {
+    $error = 'Username minimal 3 karakter.';
+  } elseif ($password !== $password2) {
+    $error = 'Password tidak cocok.';
+  } else {
+    // cek apakah username sudah ada
+    $existing = find_user_by_username($username);
+    if ($existing) {
+      $error = 'Username sudah dipakai. Silakan pilih username lain.';
     } else {
-        $res = register_user($username, $password);
-        if ($res) {
-            // auto login
-            login_user($username, $password);
-            header('Location: dashboard.php');
-            exit;
-        } else {
-            $error = 'Gagal mendaftar. Username mungkin sudah dipakai.';
-        }
+      $res = register_user($username, $password);
+      if ($res) {
+        // auto login
+        login_user($username, $password);
+        header('Location: dashboard.php');
+        exit;
+      } else {
+        $error = 'Gagal mendaftar. Terjadi kesalahan pada server.';
+      }
     }
+  }
 }
 ?>
 <?php include __DIR__ . '/inc/header.php'; ?>

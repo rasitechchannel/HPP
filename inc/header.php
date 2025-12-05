@@ -13,7 +13,7 @@
   <header class="site-header">
     <div class="container d-flex align-items-center justify-content-between py-3">
       <a class="brand" href="/">Aplikasi HPP</a>
-      <nav class="nav">
+      <nav class="nav d-flex align-items-center">
         <a class="nav-link d-inline" href="/">Home</a>
         <?php if (is_logged_in()): ?>
           <a class="nav-link d-inline" href="dashboard.php">Dashboard</a>
@@ -23,6 +23,8 @@
           <a class="nav-link d-inline" href="login.php">Login</a>
           <a class="nav-link d-inline" href="register.php">Register</a>
         <?php endif; ?>
+        <!-- Theme toggle -->
+        <button id="theme-toggle" type="button" class="btn btn-sm btn-outline-light ms-3">Light</button>
       </nav>
     </div>
   </header>

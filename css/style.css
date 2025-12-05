@@ -66,3 +66,23 @@ body{
 	.features{grid-template-columns:1fr}
 	.nav a{display:none}
 }
+
+/* Light green theme overrides */
+body.theme-light{
+  background: linear-gradient(180deg,#f6fff6 0%, #e7fff0 100%);
+  color: #0b2a1a;
+}
+body.theme-light .site-header{background: rgba(20,80,40,0.05);border-bottom-color: rgba(16,64,32,0.06)}
+body.theme-light .brand{color:#047857}
+body.theme-light .nav a{color:#0b3b27}
+body.theme-light .nav a:hover{background: rgba(4,120,87,0.06);color:#04472e}
+body.theme-light .card, body.theme-light .feature{background: #ffffff;border:1px solid rgba(4,120,87,0.06);color:#0b2a1a}
+body.theme-light .feature p, body.theme-light .hero p.lead, body.theme-light .table th, body.theme-light .table td{color:#375a47}
+body.theme-light .btn{background:linear-gradient(90deg,#10b981,#34d399);color:#053018}
+body.theme-light .btn-outline-light{color:#047857;border-color:rgba(4,120,87,0.14);background:transparent}
+body.theme-light .form input{background:#f7fff9;color:#052417;border:1px solid rgba(4,120,87,0.08)}
+body.theme-light .site-footer{border-top-color: rgba(4,120,87,0.04);color:#375a47}
+
+/* Ensure toggle button is visible on light theme */
+body.theme-light #theme-toggle{color:#fff;background:#047857}
+
