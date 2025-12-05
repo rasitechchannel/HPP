@@ -14,6 +14,7 @@
         <a href="/">Home</a>
         <?php if (is_logged_in()): ?>
           <a href="dashboard.php">Dashboard</a>
+          <a href="hpp.php">Kalkulator</a>
           <a href="logout.php">Logout</a>
         <?php else: ?>
           <a href="login.php">Login</a>
