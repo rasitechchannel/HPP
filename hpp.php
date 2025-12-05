@@ -30,18 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <p>Rumus: HPP = Persediaan Awal + Pembelian - Persediaan Akhir</p>
   <?php if ($error): ?><p class="error"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
   <form method="post" class="form">
-    <label>Persediaan Awal
-      <input name="beginning_inventory" required value="<?php echo htmlspecialchars($_POST['beginning_inventory'] ?? '0'); ?>">
-    </label>
-    <label>Pembelian
-      <input name="purchases" required value="<?php echo htmlspecialchars($_POST['purchases'] ?? '0'); ?>">
-    </label>
-    <label>Persediaan Akhir
-      <input name="ending_inventory" required value="<?php echo htmlspecialchars($_POST['ending_inventory'] ?? '0'); ?>">
-    </label>
-    <div>
-      <button class="btn" type="submit">Hitung HPP</button>
-      <a href="dashboard.php" class="btn btn-light">Kembali</a>
+    <div class="mb-3">
+      <label class="form-label">Persediaan Awal</label>
+      <input name="beginning_inventory" required class="form-control" value="<?php echo htmlspecialchars($_POST['beginning_inventory'] ?? '0'); ?>">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Pembelian</label>
+      <input name="purchases" required class="form-control" value="<?php echo htmlspecialchars($_POST['purchases'] ?? '0'); ?>">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Persediaan Akhir</label>
+      <input name="ending_inventory" required class="form-control" value="<?php echo htmlspecialchars($_POST['ending_inventory'] ?? '0'); ?>">
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" type="submit">Hitung HPP</button>
+      <a href="dashboard.php" class="btn btn-outline-secondary">Kembali</a>
     </div>
   </form>
 

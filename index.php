@@ -13,11 +13,9 @@ require_once __DIR__ . '/inc/auth.php';
 
       <div class="cta">
         <?php if (is_logged_in()): ?>
-          <a class="btn" href="dashboard.php">Buka Dashboard</a>
-          <a class="btn btn-light" href="hpp.php">Langsung Hitung</a>
+          <a class="btn btn-outline-light" href="dashboard.php">Buka Dashboard</a> <a class="btn btn-link text-decoration-none" href="logout.php">Logout</a>
         <?php else: ?>
-          <a class="btn" href="register.php">Daftar Sekarang</a>
-          <a class="btn btn-light" href="login.php">Sudah Punya Akun?</a>
+          <a class="btn btn-primary" href="register.php">Daftar Sekarang</a> <a class="btn btn-outline-light" href="login.php">Login</a>
         <?php endif; ?>
       </div>
     </div>
@@ -31,18 +29,26 @@ require_once __DIR__ . '/inc/auth.php';
   </section>
 
   <section class="features">
-    <div class="feature">
-      <h3>Aman & Lokal</h3>
-      <p>Semua data disimpan lokal di SQLite pada server Anda.</p>
-    </div>
-    <div class="feature">
-      <h3>Riwayat</h3>
-      <p>Simpan riwayat perhitungan untuk referensi dan audit.</p>
-    </div>
-    <div class="feature">
-      <h3>Mudah Digunakan</h3>
-      <p>Form sederhana yang cocok untuk pencatatan cepat</p>
-    </div>
+    <section class="features row mt-4">
+      <div class="col-md-4">
+        <div class="feature p-3">
+          <h3>Aman & Lokal</h3>
+          <p>Semua data disimpan lokal di SQLite pada server Anda.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature p-3">
+          <h3>Riwayat</h3>
+          <p>Simpan riwayat perhitungan untuk referensi dan audit.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature p-3">
+          <h3>Mudah Digunakan</h3>
+          <p>Form sederhana yang cocok untuk pencatatan cepat</p>
+        </div>
+      </div>
+    </section>
   </section>
 </main>
 

@@ -10,9 +10,9 @@ $user = current_user();
   <h1>Dashboard</h1>
   <p>Selamat datang, <strong><?php echo htmlspecialchars($user['username']); ?></strong></p>
 
-  <section class="card">
+  <section class="card mb-3">
     <h2>Kalkulator HPP</h2>
-    <p><a class="btn" href="hpp.php">Buka Kalkulator HPP</a></p>
+    <p><a class="btn btn-primary" href="hpp.php">Buka Kalkulator HPP</a></p>
   </section>
 
   <section class="card">
@@ -25,7 +25,7 @@ $user = current_user();
     if (!$rows) {
         echo '<p>Belum ada perhitungan.</p>';
     } else {
-        echo '<table class="table"><tr><th>Tanggal</th><th>Persediaan Awal</th><th>Pembelian</th><th>Persediaan Akhir</th><th>HPP</th></tr>';
+        echo '<table class="table table-striped"><tr><th>Tanggal</th><th>Persediaan Awal</th><th>Pembelian</th><th>Persediaan Akhir</th><th>HPP</th></tr>';
         foreach ($rows as $r) {
             echo '<tr>';
             echo '<td>' . htmlspecialchars($r['created_at']) . '</td>';

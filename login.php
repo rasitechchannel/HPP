@@ -24,15 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <h1>Login</h1>
   <?php if ($error): ?><p class="error"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
   <form method="post" class="form">
-    <label>Username
-      <input name="username" required>
-    </label>
-    <label>Password
-      <input name="password" type="password" required>
-    </label>
-    <div>
-      <button class="btn" type="submit">Login</button>
-      <a href="register.php" class="btn btn-light">Buat akun</a>
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      <input name="username" required class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input name="password" type="password" required class="form-control">
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" type="submit">Login</button>
+      <a href="register.php" class="btn btn-outline-secondary">Buat akun</a>
     </div>
   </form>
 </main>

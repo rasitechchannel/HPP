@@ -30,18 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <h1>Register</h1>
   <?php if ($error): ?><p class="error"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
   <form method="post" class="form">
-    <label>Username
-      <input name="username" required>
-    </label>
-    <label>Password
-      <input name="password" type="password" required>
-    </label>
-    <label>Konfirmasi Password
-      <input name="password2" type="password" required>
-    </label>
-    <div>
-      <button class="btn" type="submit">Register</button>
-      <a href="login.php" class="btn btn-light">Sudah punya akun? Login</a>
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      <input name="username" required class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input name="password" type="password" required class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Konfirmasi Password</label>
+      <input name="password2" type="password" required class="form-control">
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" type="submit">Register</button>
+      <a href="login.php" class="btn btn-outline-secondary">Sudah punya akun? Login</a>
     </div>
   </form>
 </main>
